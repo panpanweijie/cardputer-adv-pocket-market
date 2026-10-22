@@ -25,10 +25,10 @@
 
 | 文件 | 地址 | 用途 |
 | --- | --- | --- |
-| `firmware/pocket-market-v5.22-motion-full-0x0.bin` | **0x0** | 首次完整安装，含体感；会覆盖配置区域 |
-| `firmware/pocket-market-v5.22-standard-full-0x0.bin` | **0x0** | 首次完整安装，不含体感 |
-| `firmware/pocket-market-v5.22-motion-update-0x10000.bin` | **0x10000** | 已使用本项目相同分区的升级，保留配置，不擦除 Flash |
-| `firmware/pocket-market-v5.22-standard-update-0x10000.bin` | **0x10000** | 去除体感，其余功能相同；同布局升级 |
+| [含体感完整安装](https://github.com/panpanweijie/cardputer-adv-pocket-market/raw/refs/heads/main/firmware/pocket-market-v5.22-motion-full-0x0.bin) | **0x0** | 首次完整安装，含体感；会覆盖配置区域 |
+| [标准版完整安装](https://github.com/panpanweijie/cardputer-adv-pocket-market/raw/refs/heads/main/firmware/pocket-market-v5.22-standard-full-0x0.bin) | **0x0** | 首次完整安装，不含体感 |
+| [含体感保留配置升级](https://github.com/panpanweijie/cardputer-adv-pocket-market/raw/refs/heads/main/firmware/pocket-market-v5.22-motion-update-0x10000.bin) | **0x10000** | 已使用本项目相同分区的升级，保留配置，不擦除 Flash |
+| [标准版保留配置升级](https://github.com/panpanweijie/cardputer-adv-pocket-market/raw/refs/heads/main/firmware/pocket-market-v5.22-standard-update-0x10000.bin) | **0x10000** | 去除体感，其余功能相同；同布局升级 |
 
 源码与固件：[GitHub](https://github.com/panpanweijie/cardputer-adv-pocket-market)。
 
@@ -38,7 +38,7 @@ M5Burner 网页入口：[Cardputer ADV](https://burner.m5stack.com/device/cardpu
 
 ## 全部按键与操作
 
-[完整按键表](docs/全部按键.md) · [手机管理与搜索](docs/手机管理与搜索.md) · [数据与市场规则](docs/数据与市场规则.md) · [构建说明](docs/构建说明.md) · [发布验证](docs/发布验证.md) · [发布验证](docs/发布验证.md) · [发布验证](docs/发布验证.md) · [发布验证](docs/发布验证.md) · [发布验证](docs/发布验证.md)
+[完整按键表](docs/全部按键.md) · [手机管理与搜索](docs/手机管理与搜索.md) · [数据与市场规则](docs/数据与市场规则.md) · [构建说明](docs/构建说明.md) · [发布验证](docs/发布验证.md)
 
 ## 版本选择
 
