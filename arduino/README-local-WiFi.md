@@ -1,0 +1,1 @@
+Arduino IDE source build requires the patched library from ../lib/WiFi in addition to normal dependencies. PlatformIO automatically chooses the local library. Do not assume an unmodified Arduino 2.0.16 WiFi library has this fix.

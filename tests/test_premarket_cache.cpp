@@ -1,0 +1,6 @@
+#include "premarket_cache_policy.h"
+#include <cassert>
+#include <fstream>
+#include <iostream>
+int main(int argc,char**argv){assert(argc==2);DynamicJsonDocument doc(8192),filter(512);filter["data"]["usBMNR"]["pandata"]=true;std::ifstream in(argv[1]);assert(!deserializeJson(doc,in,DeserializationOption::Filter(filter)));PreQuote q=decodeTencentPre(doc["data"]["usBMNR"]["pandata"]);assert(q.valid&&q.hasPercent);int64_t now=q.timestamp+30;
+assert(premarketDue("usBMNR",q,now,false,0,false,1000,60000));assert(!premarketDue("usBMNR",q,now,true,1000,false,60999,60000));assert(premarketDue("usBMNR",q,now,true,1000,false,61000,60000));assert(!premarketDue("usBMNR",q,now,true,1000,true,180999,60000));assert(premarketDue("usBMNR",q,now,true,1000,true,181000,60000));assert(!premarketDue("hk00700",q,now,false,0,false,1000,60000));assert(!premarketDue("usBMNR",q,q.sessionEnd,false,0,false,1000,60000));assert(acceptPreload("usBMNR",q,now));assert(!acceptPreload("usBMNR",q,q.sessionEnd));auto bad=q;bad.hasPercent=false;assert(!acceptPreload("usBMNR",bad,now));bad=q;bad.timestamp=q.sessionEnd;assert(!acceptPreload("usBMNR",bad,now));bad=q;bad.sessionStart-=86400;bad.sessionEnd-=86400;assert(!acceptPreload("usBMNR",bad,now));std::cout<<"PASS pre-market scheduling, 60s cache/3min retry, US-only phase gate, same-session paired data and open boundary\n";}

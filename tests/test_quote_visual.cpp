@@ -1,0 +1,4 @@
+#include "quote_visual_policy.h"
+#include <cassert>
+#include <iostream>
+int main(){for(auto age:{QuoteAge::OK,QuoteAge::OLD,QuoteAge::DELAYED,QuoteAge::MISSING}){auto v=quoteVisualState(true,TradingPhase::OPEN,age);assert(v.bright);assert(v.dot==(age==QuoteAge::OK?QuoteDot::NONE:QuoteDot::ATTENTION));for(auto phase:{TradingPhase::CLOSED,TradingPhase::PRE,TradingPhase::POST,TradingPhase::LUNCH,TradingPhase::CLOCK}){v=quoteVisualState(true,phase,age);assert(!v.bright&&v.dot==QuoteDot::NONE);}}auto v=quoteVisualState(false,TradingPhase::OPEN,QuoteAge::MISSING);assert(!v.bright&&v.dot==QuoteDot::NONE);v=quoteVisualState(true,TradingPhase::AUCTION,QuoteAge::DELAYED);assert(v.bright&&v.dot==QuoteDot::ATTENTION);std::cout<<"PASS active prices bright regardless of age; inactive grey; orange anomaly priority; unknown quote no transient marker\n";}

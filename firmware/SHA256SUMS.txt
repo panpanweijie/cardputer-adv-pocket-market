@@ -1,0 +1,4 @@
+8dd5d5a661a2268cd39c192b8728badb68a6c779522fbdb2a78ba085dc9e0fe2  pocket-market-v5.22-motion-full-0x0.bin
+923d18a9f3b7b28b1c20d8ee774b7743f773972177c50f4d25422d2662a21f8b  pocket-market-v5.22-motion-update-0x10000.bin
+866b347ab2e0611812de24c40e96647e6cfaae78b82caeb8b98b03dd1599d8f4  pocket-market-v5.22-standard-full-0x0.bin
+df92670e4423105696afe1fb023819a1f5452968df327573c33d2da6d988f87a  pocket-market-v5.22-standard-update-0x10000.bin

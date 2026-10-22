@@ -1,0 +1,4 @@
+#include "local_clock.h"
+#include <cassert>
+#include <iostream>
+int main(){int64_t utc=parseCivil("2026-10-20 10:42:15");assert(localClockText(0,utc)=="BJT 18:42:15");assert(localClockText(1,utc)=="NY 06:42:15");assert(localClockText(2,utc)=="JST 19:42:15");assert(localClockText(3,utc)=="LDN 11:42:15");assert(localClockText(4,utc)=="UTC 10:42:15");assert(localClockText(0,0)=="BJT --:--:--");assert(localZoneOffset(1,parseCivil("2026-01-20 10:00:00"))==-18000);assert(localZoneOffset(3,parseCivil("2026-01-20 10:00:00"))==0);assert(localZoneOffset(3,parseCivil("2026-03-29 00:59:59"))==0);assert(localZoneOffset(3,parseCivil("2026-03-29 01:00:00"))==3600);assert(localZoneOffset(3,parseCivil("2026-10-25 01:00:00"))==0);std::cout<<"PASS local clock, five regions, unsynced placeholder, New York/London DST\n";}
