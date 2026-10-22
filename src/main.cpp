@@ -25,7 +25,7 @@
 #define STOCK_ENABLE_MOTION 1
 #endif
 constexpr bool motionFeatureAvailable=STOCK_ENABLE_MOTION;
-const char* releaseVersion=motionFeatureAvailable?"v5.22 M":"v5.22 S";
+const char* releaseVersion=motionFeatureAvailable?"v5.23 M":"v5.23 S";
 
 // 公共固件不预置 Wi-Fi。首次启动会直接进入 Wi-Fi 扫描界面让用户输入。
 // Public firmware ships with no preset Wi-Fi credentials — first boot will scan and prompt.

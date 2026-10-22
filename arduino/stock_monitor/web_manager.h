@@ -1,5 +1,6 @@
 #pragma once
 #include "phone_page.h"
+#include "stock_aliases.h"
 WebServer phoneServer(80);
 bool phoneServerStarted=false;
 bool phoneRoutesReady=false;
@@ -25,7 +26,18 @@ void initializePhoneRoutes(){
         String list=prefs.getString("list","");
         // Read current runtime list, including the initial defaults before first save.
         list="";for(int i=0;i<stockCount;++i){if(i)list+=",";list+=stockCodes[i];}
-        DynamicJsonDocument doc(512+list.length());doc["symbols"]=list;doc["csrf"]=phoneToken;
+        // Names reuse the quote cache / curated aliases; opening the page makes no extra quote requests.
+        size_t capacity=512+list.length()*2+JSON_OBJECT_SIZE(stockCount);
+        for(int i=0;i<stockCount;++i)capacity+=stockCodes[i].length()+stocks[i].displayName.length()+stocks[i].name.length()+128;
+        DynamicJsonDocument doc(capacity);doc["symbols"]=list;doc["csrf"]=phoneToken;
+        JsonObject names=doc.createNestedObject("names");
+        for(int i=0;i<stockCount;++i){
+            String name=stocks[i].displayName;
+            for(const auto& alias:STOCK_ALIASES)if(stockCodes[i]==alias.code){name=alias.name;break;}
+            if(!name.length() && stocks[i].name!="Loading...")name=stocks[i].name;
+            if(name.length() && name!=stockCodes[i])names[stockCodes[i]]=name;
+        }
+        if(doc.overflowed()){phoneError(503,"名称读取失败，请重试");return;}
         String out;serializeJson(doc,out);phoneJson(200,out);
     });
     phoneServer.on("/api/watchlist",HTTP_POST,[]{

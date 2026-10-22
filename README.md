@@ -4,7 +4,7 @@
 
 把 Cardputer ADV 变成独立联网的股票信息小屏。支持美股、港股、沪深股票以及数据源支持的 ETF / 指数；提供三行自选、体感卡牌、多周期图表、拼音搜索和手机自选管理。
 
-当前版本 **v5.22**。仅面向 **Cardputer ADV / ESP32-S3 / 8MB Flash / 240×135**；其他硬件未验证。
+当前版本 **v5.23**。仅面向 **Cardputer ADV / ESP32-S3 / 8MB Flash / 240×135**；其他硬件未验证。
 
 ## 能做什么
 
@@ -25,14 +25,20 @@
 
 | 文件 | 地址 | 用途 |
 | --- | --- | --- |
-| [含体感完整安装](https://github.com/panpanweijie/cardputer-adv-pocket-market/raw/refs/heads/main/firmware/pocket-market-v5.22-motion-full-0x0.bin) | **0x0** | 首次完整安装，含体感；会覆盖配置区域 |
-| [含体感保留配置升级](https://github.com/panpanweijie/cardputer-adv-pocket-market/raw/refs/heads/main/firmware/pocket-market-v5.22-motion-update-0x10000.bin) | **0x10000** | 已使用本项目相同分区的升级，保留配置，不擦除 Flash |
+| [含体感完整安装](https://github.com/panpanweijie/cardputer-adv-pocket-market/raw/refs/heads/main/firmware/pocket-market-v5.23-motion-full-0x0.bin) | **0x0** | 首次完整安装，含体感；会覆盖配置区域 |
+| [含体感保留配置升级](https://github.com/panpanweijie/cardputer-adv-pocket-market/raw/refs/heads/main/firmware/pocket-market-v5.23-motion-update-0x10000.bin) | **0x10000** | 已使用本项目相同分区的升级，保留配置，不擦除 Flash |
 
 源码与固件：[GitHub](https://github.com/panpanweijie/cardputer-adv-pocket-market)。
 
 M5Burner 网页入口：[Cardputer ADV](https://burner.m5stack.com/device/cardputer-adv)。本交付尚未上架；上架后可在该分类搜索 **Pocket Market**。本地也可用 [Espressif Web Flasher](https://espressif.github.io/esptool-js/) 按表中地址写入。不要把 full 与 update 的地址混用。
 
 首次开机：TAB → Wi-Fi → Enter 扫描 → 选择网络 → Enter 输入密码 → Enter 连接。再按 F 搜索或 W 用手机管理自选。初始列表是公共演示列表，可以替换。
+
+## v5.23 更新
+
+手机自选排序区现在显示“代码 · 名称”，与常用列表保持一致。常用股票优先中文名，其他股票复用设备缓存名称；暂时没有名称时保留代码。拖动排序、删除和保存操作不变，不增加行情请求。升级后重新进入扫码管理页并刷新手机网页。
+
+已通过编译、固件校验和网页排序保存测试，尚未完成真机验证。
 
 ## 快捷键与功能速查
 
