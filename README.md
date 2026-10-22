@@ -1,6 +1,6 @@
 # Pocket Market · Cardputer ADV 股票看板
 
-![Pocket Market](assets/cover-1600x900.png)
+![Pocket Market](assets/cover-tech-landscape.png)
 
 把 Cardputer ADV 变成独立联网的股票信息小屏。支持美股、港股、沪深股票以及数据源支持的 ETF / 指数；提供三行自选、体感卡牌、多周期图表、拼音搜索和手机自选管理。
 
@@ -26,9 +26,7 @@
 | 文件 | 地址 | 用途 |
 | --- | --- | --- |
 | [含体感完整安装](https://github.com/panpanweijie/cardputer-adv-pocket-market/raw/refs/heads/main/firmware/pocket-market-v5.22-motion-full-0x0.bin) | **0x0** | 首次完整安装，含体感；会覆盖配置区域 |
-| [标准版完整安装](https://github.com/panpanweijie/cardputer-adv-pocket-market/raw/refs/heads/main/firmware/pocket-market-v5.22-standard-full-0x0.bin) | **0x0** | 首次完整安装，不含体感 |
 | [含体感保留配置升级](https://github.com/panpanweijie/cardputer-adv-pocket-market/raw/refs/heads/main/firmware/pocket-market-v5.22-motion-update-0x10000.bin) | **0x10000** | 已使用本项目相同分区的升级，保留配置，不擦除 Flash |
-| [标准版保留配置升级](https://github.com/panpanweijie/cardputer-adv-pocket-market/raw/refs/heads/main/firmware/pocket-market-v5.22-standard-update-0x10000.bin) | **0x10000** | 去除体感，其余功能相同；同布局升级 |
 
 源码与固件：[GitHub](https://github.com/panpanweijie/cardputer-adv-pocket-market)。
 
@@ -36,13 +34,55 @@ M5Burner 网页入口：[Cardputer ADV](https://burner.m5stack.com/device/cardpu
 
 首次开机：TAB → Wi-Fi → Enter 扫描 → 选择网络 → Enter 输入密码 → Enter 连接。再按 F 搜索或 W 用手机管理自选。初始列表是公共演示列表，可以替换。
 
-## 全部按键与操作
+## 快捷键与功能速查
 
-[完整按键表](docs/全部按键.md) · [手机管理与搜索](docs/手机管理与搜索.md) · [数据与市场规则](docs/数据与市场规则.md) · [构建说明](docs/构建说明.md) · [发布验证](docs/发布验证.md)
+### 日常看盘
 
-## 版本选择
+- **G**：普通列表 / 体感卡牌切换。
+- **U**：刷新当前报价；详情页同时重试图表。首页 / 详情也可按侧键刷新。
+- **F**：搜索股票，支持代码、名称及常用股票拼音 / 首字母。
+- **W**：显示二维码，手机在同一 Wi-Fi 下扫码管理自选、拖动排序并保存。
+- **B**：关屏 / 亮屏；关屏后设备仍工作联网。
+- **ESC**：返回上一层；卡牌返回普通列表，删除确认页取消删除。
 
-motion 包含实验性 IMU 卡牌模式；standard 移除体感入口，其余功能保留。体感手感、网络可达性和长时间运行效果受设备与网络影响。两种公开固件已完成编译、镜像校验和包内容检查，公开整包的全新设备烧录及持续运行尚未完整验收；不把构建通过视为硬件验收。
+### 普通列表
+
+- **上 / 下**：切换股票，长按加速；首尾循环并提示边界。
+- **1 / 2 / 3**：打开当前屏对应股票详情。
+- **Enter**：手工编辑自选代码列表。
+- **TAB**：打开设置，可调整 Wi-Fi、刷新间隔、亮度、时区和体感开关。
+
+### 体感卡牌
+
+- **左右倾斜设备**：滑动选卡，中央卡牌放大。
+- **左 / 右**：微调选卡，长按连续滑动并加速。
+- **Enter**：查看当前卡牌详情；卡牌不使用 1 / 2 / 3。
+- **ESC**：退出卡牌，返回普通列表。
+
+### 股票详情
+
+- **TAB**：切换 5 日、日 K、周 K、月 K、年 K。
+- **空格**：切换 K 线 / 收盘价折线；5 日保持线图。
+- **Z / X**：放大 / 缩小图表。
+- **; 或 , / . 或 /**：上一只 / 下一只股票。
+- **D**：申请删除当前股票；再按 **Enter** 确认，**ESC** 取消。
+
+### 搜索、输入与联网
+
+- **TAB（搜索中）**：切换 CN 拼音 / EN 英文模式。
+- **1 / 2 / 3（有拼音组合时）**：选对应候选；**空格**选首个候选。
+- **Enter（搜索中）**：提交候选 / 查询 / 添加选中结果，按当前步骤执行。
+- **DEL**：删除输入字符，无需 Fn。
+- **R（Wi-Fi 扫描页）**：重新扫描；断网也能使用。
+- **Enter（设置 / Wi-Fi）**：选择项目、输入密码或保存连接。
+
+字符方向键、候选翻页、完整输入规则与返回层级见 [完整按键表](docs/全部按键.md)。输入页面里的 B / F / G / U / W 是输入字符，不触发功能。
+
+[手机管理与搜索](docs/手机管理与搜索.md) · [数据与市场规则](docs/数据与市场规则.md) · [构建说明](docs/构建说明.md) · [发布验证](docs/发布验证.md)
+
+## 体感版说明
+
+本页提供包含 IMU 体感卡牌的版本，同时保留普通列表，可按 G 切换。体感手感、网络可达性和长时间运行效果受设备与网络影响。固件已完成编译、镜像校验和包内容检查；公开整包的全新设备烧录及持续运行尚未完整验收。
 
 ## 数据与边界
 
@@ -54,7 +94,7 @@ Wi-Fi 图标蓝色表示已连接路由器，红色表示未连接，不代表�
 
 基于 [ansonlianson/cardputer-adv-stock-monitor](https://github.com/ansonlianson/cardputer-adv-stock-monitor) 修改，保留原 MIT 许可，见 [LICENSE](LICENSE)。依赖包含 M5Cardputer、M5Unified、M5GFX、ArduinoJson 与 Arduino ESP32，各自遵循对应许可。GitHub 账号：[panpanweijie](https://github.com/panpanweijie)。
 
-前五张功能配图为界面示意；第六张使用用户 ADV 实拍与项目真实网页截图，网页填充公共示例自选，二维码及局域网地址已模糊。
+封面基于真实 ADV 照片合成，屏幕为界面示意。前五张功能配图为界面示意；第六张使用用户 ADV 实拍与项目真实网页截图，网页填充公共示例自选，二维码及局域网地址已模糊。
 
 ## Wi-Fi 与功耗（v5.22）
 
