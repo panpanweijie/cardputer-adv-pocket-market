@@ -25,7 +25,7 @@
 #define STOCK_ENABLE_MOTION 1
 #endif
 constexpr bool motionFeatureAvailable=STOCK_ENABLE_MOTION;
-const char* releaseVersion=motionFeatureAvailable?"v5.23 M":"v5.23 S";
+const char* releaseVersion=motionFeatureAvailable?"v5.24 M":"v5.24 S";
 
 // 公共固件不预置 Wi-Fi。首次启动会直接进入 Wi-Fi 扫描界面让用户输入。
 // Public firmware ships with no preset Wi-Fi credentials — first boot will scan and prompt.
@@ -749,7 +749,7 @@ void tickPremarket() {
         }
         if (safe) {
             // Tencent's US minute response explicitly labels pre/post in pandata.tag.
-            String code=stockCodes[i];
+            String code=premarketRequestCode(stockCodes[i].c_str(),stock.exchangeCode.c_str()).c_str();
             WiFiClientSecure client;client.setInsecure();client.setHandshakeTimeout(5);client.setTimeout(5);HTTPClient http;
             String url="https://web.ifzq.gtimg.cn/appstock/app/usMinute/query?code="+code;
             if(http.begin(client,url)) {

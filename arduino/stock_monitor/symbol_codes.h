@@ -10,3 +10,12 @@ inline std::string canonicalUsTicker(std::string ticker){
  return ticker;
 }
 inline std::string canonicalWatchSymbol(const std::string&code){return code.compare(0,2,"us")==0?"us"+canonicalUsTicker(code.substr(2)):code;}
+
+// Class-share minute routes require the provider exchange suffix. Never save it as the ticker.
+inline std::string premarketRequestCode(const std::string& saved,const std::string& exchange){
+ if(saved.compare(0,2,"us")!=0)return saved;
+ const auto ticker=saved.substr(2);
+ if(ticker.find('.')==std::string::npos || exchange.empty() || canonicalUsTicker(exchange)!=ticker)return saved;
+ for(unsigned char c:exchange)if(!((c>='A'&&c<='Z')||(c>='0'&&c<='9')||c=='.'||c=='-'||c=='^'))return saved;
+ return "us"+exchange;
+}

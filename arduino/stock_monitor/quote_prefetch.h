@@ -8,7 +8,7 @@
 struct QuotePrefetchJob{
  uint32_t generation=0,started=0;
  std::vector<int> indices;std::vector<String> codes;
- String url,payload,date,marketLine;PreQuote pre;QueueHandle_t destination=nullptr;bool ok=false,premarket=false;
+ String url,payload,date,marketLine,requestCode;PreQuote pre;QueueHandle_t destination=nullptr;bool ok=false,premarket=false;
 };
 QueueHandle_t quotePrefetchResults=nullptr;
 void quotePrefetchWorker(void* arg){
@@ -19,7 +19,7 @@ void quotePrefetchWorker(void* arg){
    prepareHttp(http);http.setConnectTimeout(2500);http.setTimeout(4000);
    int status=http.GET();job->date=http.header("Date");
    if(status==HTTP_CODE_OK&&http.getSize()<=150000){
-    const String&code=job->codes[0];DynamicJsonDocument filter(2048),doc(6144);
+    const String&code=job->requestCode;DynamicJsonDocument filter(2048),doc(6144);
     filter["code"]=true;filter["data"][code]["pandata"]=true;filter["data"][code]["qt"]["market"][0]=true;
     auto error=deserializeJson(doc,http.getStream(),DeserializationOption::Filter(filter));
     if(!error&&doc["code"].as<int>()==0&&doc["data"][code].is<JsonObject>()){
@@ -93,7 +93,8 @@ void tickQuotePrefetch(){
  }
  if(preIndex>=0&&(visiblePreDue||!lastWasPre||job->indices.empty())&&ESP.getFreeHeap()>=135000&&ESP.getMaxAllocHeap()>=49152){
   job->premarket=true;job->indices.clear();job->codes.clear();job->indices.push_back(preIndex);job->codes.push_back(stockCodes[preIndex]);
-  job->url="https://web.ifzq.gtimg.cn/appstock/app/usMinute/query?code="+stockCodes[preIndex];
+  job->requestCode=premarketRequestCode(stockCodes[preIndex].c_str(),stocks[preIndex].exchangeCode.c_str()).c_str();
+  job->url="https://web.ifzq.gtimg.cn/appstock/app/usMinute/query?code="+job->requestCode;
  }
  if(job->indices.empty()){delete job;return;}
  lastStart=now;prefetchBusy=true;
